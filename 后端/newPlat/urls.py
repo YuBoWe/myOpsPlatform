@@ -16,7 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
+from django.http import HttpRequest
+from django.views.decorators.http import require_http_methods
+
+def request_method(method=None):
+    def wrapper(func):
+        def inner(request: HttpRequest, *args, **kwargs):
+            if request.method.upper() not in method:
+                return HttpResponseBadRequest("Method not allowed")
+            return func(request, *args, **kwargs)
+        return inner
+    return wrapper
+
+## @request_method(method=["POST", "GET"])
+@require_http_methods(["POST", "GET"])
+def json_response(request: HttpRequest):
+    print(request.method)
+    data = {'a': 123, 'b': 'abc'}
+    return JsonResponse(data)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('json_response/', json_response),
 ]
