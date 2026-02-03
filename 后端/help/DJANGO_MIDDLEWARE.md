@@ -15,12 +15,12 @@ Django 中间件是一个轻量级、底层的 "插件" 系统，用于在全局
 
 ```mermaid
 graph TD
-    User([用户请求]) --> M1_Pre[Middleware A (Pre)]
-    M1_Pre --> M2_Pre[Middleware B (Pre)]
-    M2_Pre --> View[执行 View 视图]
-    View --> M2_Post[Middleware B (Post)]
-    M2_Post --> M1_Post[Middleware A (Post)]
-    M1_Post --> User([返回响应])
+    User(["用户请求"]) --> M1_Pre["Middleware A (Pre)"]
+    M1_Pre --> M2_Pre["Middleware B (Pre)"]
+    M2_Pre --> View["执行 View 视图"]
+    View --> M2_Post["Middleware B (Post)"]
+    M2_Post --> M1_Post["Middleware A (Post)"]
+    M1_Post --> User(["返回响应"])
 
     subgraph "Request Phase (Top-Down)"
     M1_Pre

@@ -91,11 +91,11 @@ graph TD
     end
 
     subgraph "Browser (Client Side)"
-    CookieStorage[(Cookie Storage)]
+    CookieStorage[("Cookie Storage")]
     end
 
     subgraph "Server (Django Side)"
-    SessionData[(Session Backend/DB)]
+    SessionData[("Session Backend/DB")]
     end
 
     Request -- "自动携带 Cookie (Session ID)" --> SessionData
